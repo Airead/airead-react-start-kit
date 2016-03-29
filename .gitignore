@@ -3,3 +3,4 @@ build
 .tags*
 bundle.js
 *.map
+npm-debug.log
