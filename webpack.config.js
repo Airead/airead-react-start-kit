@@ -5,6 +5,10 @@ const webpack = require('webpack');
 const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
+var publicPath = 'http://localhost:8088/';
+// var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
+var hotMiddlewareScript = 'webpack-hot-middleware/client';
+
 const PATHS = {
     app: path.join(__dirname, 'app'),
     build: path.join(__dirname, 'public')
@@ -19,7 +23,8 @@ const common = {
     },
     output: {
         path: PATHS.build,
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: publicPath,
     },
     module: {
         loaders: [{
@@ -38,6 +43,9 @@ const common = {
 
 if (TARGET === 'start' || !TARGET) {
     module.exports = merge(common, {
+        entry: {
+            app: [PATHS.app, 'webpack-hot-middleware/client?reload=true']
+        },
         devtool: 'source-map',
         devServer: {
             contentBase: './public',
@@ -51,7 +59,8 @@ if (TARGET === 'start' || !TARGET) {
             port: process.env.PORT
         },
         plugins: [
-            new webpack.HotModuleReplacementPlugin()
+            new webpack.optimize.OccurenceOrderPlugin(),
+            new webpack.HotModuleReplacementPlugin(),
         ]
     });
 }
