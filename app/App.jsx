@@ -5,7 +5,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1 className={appCss.fontColor}>World!</h1>
+                <h1 className={appCss.fontColor}>World</h1>
             </div>
         );
     }

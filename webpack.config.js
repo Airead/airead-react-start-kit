@@ -6,8 +6,7 @@ const TARGET = process.env.npm_lifecycle_event;
 process.env.BABEL_ENV = TARGET;
 
 var publicPath = 'http://localhost:8088/';
-// var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
-var hotMiddlewareScript = 'webpack-hot-middleware/client';
+var hotMiddlewareScript = 'webpack-hot-middleware/client?reload=true';
 
 const PATHS = {
     app: path.join(__dirname, 'app'),
@@ -44,7 +43,7 @@ const common = {
 if (TARGET === 'start' || !TARGET) {
     module.exports = merge(common, {
         entry: {
-            app: [PATHS.app, 'webpack-hot-middleware/client?reload=true']
+            app: [PATHS.app, hotMiddlewareScript],
         },
         devtool: 'source-map',
         devServer: {
