@@ -1,10 +1,11 @@
 import React from 'react';
+import appCss from './css/app.css';
 
 class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>World</h1>
+                <h1 className={appCss.fontColor}>World</h1>
             </div>
         );
     }
